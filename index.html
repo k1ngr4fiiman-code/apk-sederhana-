@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rafiko Iman</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#071b16;
+  color:white;
+}
+
+button{
+  font-family:inherit;
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  max-width:600px;
+  min-height:100vh;
+  margin:auto;
+  background:#09231c;
+  padding-bottom:80px;
+}
+
+header{
+  padding:22px 18px;
+  background:linear-gradient(135deg,#0b513d,#0d7655);
+  border-radius:0 0 25px 25px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:bold;
+}
+
+.subtitle{
+  opacity:.8;
+  margin-top:5px;
+}
+
+.page{
+  display:none;
+  padding:18px;
+}
+
+.page.active{
+  display:block;
+}
+
+.card{
+  background:#10382d;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 6px 20px #0004;
+}
+
+.big{
+  font-size:55px;
+  text-align:center;
+  margin:15px 0;
+}
+
+.mainBtn{
+  width:100%;
+  padding:16px;
+  margin:7px 0;
+  border-radius:14px;
+  background:#19a974;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.mainBtn:active,
+.levelBtn:active,
+.option:active{
+  transform:scale(.97);
+}
+
+.secondary{
+  background:#174c3c;
+}
+
+.gold{
+  background:#c99a25;
+}
+
+.back{
+  background:#174c3c;
+  padding:12px 16px;
+  border-radius:12px;
+  color:white;
+  margin-bottom:15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.levelBtn{
+  padding:15px 5px;
+  border-radius:14px;
+  background:#16a36f;
+  color:white;
+  font-weight:bold;
+}
+
+.levelBtn.locked{
+  background:#263c36;
+  color:#73837e;
+}
+
+.levelBtn.done{
+  background:#b98c1d;
+}
+
+.progress{
+  height:12px;
+  background:#203b33;
+  border-radius:20px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+.progressBar{
+  height:100%;
+  width:0%;
+  background:#19d28b;
+  transition:.3s;
+}
+
+.option{
+  width:100%;
+  padding:16px;
+  margin:7px 0;
+  border-radius:14px;
+  background:#174c3c;
+  color:white;
+  text-align:left;
+  font-size:15px;
+}
+
+.result{
+  padding:15px;
+  border-radius:14px;
+  background:#173f34;
+  margin-top:10px;
+  line-height:1.6;
+}
+
+.hijaiyah{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.letter{
+  background:#174c3c;
+  padding:14px 5px;
+  border-radius:12px;
+  text-align:center;
+  font-size:30px;
+}
+
+.iqroGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.iqro{
+  padding:22px 10px;
+  border-radius:16px;
+  background:#14533f;
+  text-align:center;
+}
+
+.iqro b{
+  display:block;
+  font-size:24px;
+  margin-bottom:6px;
+}
+
+.lesson{
+  background:#174c3c;
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:12px;
+  text-align:center;
+}
+
+.read{
+  font-size:34px;
+  margin:10px 0;
+  line-height:1.8;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:600px;
+  height:68px;
+  background:#061610;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:20;
+}
+
+.navBtn{
+  background:transparent;
+  color:#8da59d;
+  font-size:12px;
+}
+
+.navBtn.active{
+  color:#20d894;
+}
+
+.score{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.center{
+  text-align:center;
+}
+
+small{
+  color:#a9beb7;
+}
+
+textarea{
+  width:100%;
+  min-height:100px;
+  border-radius:12px;
+  padding:12px;
+  border:0;
+  background:#173f34;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">🌙 Rafiko Iman</div>
+  <div class="subtitle">Belajar Islam • Iqro • Kuis</div>
+</header>
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+  <div class="card center">
+    <div style="font-size:50px">🕌</div>
+    <h2>Assalamu'alaikum 👋</h2>
+    <p>Selamat datang di apk sederhana milik RAFIKO iman.</p>
+    <p>Belajar Islam dengan cara sederhana dan gratis.</p>
+  </div>
+
+  <button class="mainBtn" onclick="showPage('iqro')">
+    📖 Belajar Iqro
+  </button>
+
+  <button class="mainBtn" onclick="showPage('hijaiyah')">
+    🔤 Huruf Hijaiyah
+  </button>
+
+  <button class="mainBtn gold" onclick="showPage('quiz')">
+    🧠 Kuis Islam 50 Level
+  </button>
+
+  <button class="mainBtn secondary" onclick="showPage('voice')">
+    🎤 Latihan Membaca
+  </button>
+
+</section>
+
+<!-- HIJAIYAH -->
+<section id="hijaiyah" class="page">
+
+<button class="back" onclick="showPage('home')">← Kembali</button>
+
+<div class="card">
+<h2>🔤 Huruf Hijaiyah</h2>
+<p>Tekan huruf untuk mendengarkan namanya.</p>
+</div>
+
+<div id="letters" class="hijaiyah"></div>
+
+</section>
+
+<!-- IQRO -->
+<section id="iqro" class="page">
+
+<button class="back" onclick="showPage('home')">← Kembali</button>
+
+<div class="card">
+<h2>📖 Belajar Iqro</h2>
+<p>Pilih jilid yang ingin dipelajari.</p>
+</div>
+
+<div class="iqroGrid" id="iqroList"></div>
+
+</section>
+
+<!-- IQRO DETAIL -->
+<section id="iqroDetail" class="page">
+
+<button class="back" onclick="showPage('iqro')">← Daftar Iqro</button>
+
+<div class="card">
+<h2 id="iqroTitle"></h2>
+<p>Tekan bacaan untuk mendengarkan.</p>
+</div>
+
+<div id="lessonList"></div>
+
+</section>
+
+<!-- QUIZ LEVEL -->
+<section id="quiz" class="page">
+
+<button class="back" onclick="showPage('home')">← Kembali</button>
+
+<div class="card">
+<h2>🧠 Kuis Islam</h2>
+<p>50 level • 5 soal setiap level</p>
+
+<div class="score">
+⭐ Skor: <span id="totalScore">0</span>
+</div>
+
+<div class="progress">
+<div class="progressBar" id="mainProgress"></div>
+</div>
+
+<p><small>Minimal 4 benar dari 5 untuk membuka level berikutnya.</small></p>
+</div>
+
+<div class="grid" id="levelList"></div>
+
+</section>
+
+<!-- QUIZ PLAY -->
+<section id="quizPlay" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('quiz')">← Pilih Level</button>
+
+<h2 id="levelTitle"></h2>
+
+<p>
+Soal <span id="qNumber">1</span> dari 5
+</p>
+
+<div class="progress">
+<div class="progressBar" id="questionProgress"></div>
+</div>
+
+<h3 id="question"></h3>
+
+<div id="options"></div>
+
+<div id="quizResult"></div>
+
+</div>
+
+</section>
+
+<!-- VOICE -->
+<section id="voice" class="page">
+
+<button class="back" onclick="showPage('home')">← Kembali</button>
+
+<div class="card">
+<h2>🎤 Latihan Membaca</h2>
+<p>Ketik huruf/kata Arab yang ingin kamu dengarkan.</p>
+
+<textarea id="voiceText" placeholder="Contoh: بَ تَ ثَ"></textarea>
+
+<button class="mainBtn" onclick="speakText()">
+🔊 Dengarkan
+</button>
+
+<button class="mainBtn secondary" onclick="startListening()">
+🎤 Coba Baca
+</button>
+
+<div id="voiceResult" class="result">
+Belum ada latihan.
+</div>
+
+</div>
+
+</section>
+
+<!-- PROGRESS -->
+<section id="progress" class="page">
+
+<button class="back" onclick="showPage('home')">← Kembali</button>
+
+<div class="card">
+<h2>📊 Progress Kamu</h2>
+
+<p>Level terbuka:</p>
+<h2><span id="progressLevel">1</span> / 50</h2>
+
+<p>Total skor:</p>
+<h2>⭐ <span id="progressScore">0</span></h2>
+
+<p>Soal benar:</p>
+<h2>✅ <span id="progressCorrect">0</span></h2>
+</div>
+
+<button class="mainBtn" onclick="resetProgress()">
+🔄 Reset Progress
+</button>
+
+</section>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="bottom">
+
+<button class="navBtn active" onclick="showPage('home')">
+🏠<br>Beranda
+</button>
+
+<button class="navBtn" onclick="showPage('iqro')">
+📖<br>Iqro
+</button>
+
+<button class="navBtn" onclick="showPage('quiz')">
+🧠<br>Kuis
+</button>
+
+<button class="navBtn" onclick="showPage('progress')">
+📊<br>Progress
+</button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DATA DASAR
+========================= */
+
+const hijaiyah = [
+["ا","Alif"],["ب","Ba"],["ت","Ta"],["ث","Tsa"],
+["ج","Jim"],["ح","Ha"],["خ","Kha"],["د","Dal"],
+["ذ","Dzal"],["ر","Ra"],["ز","Zai"],["س","Sin"],
+["ش","Syin"],["ص","Shad"],["ض","Dhad"],["ط","Tha"],
+["ظ","Zha"],["ع","Ain"],["غ","Ghain"],["ف","Fa"],
+["ق","Qaf"],["ك","Kaf"],["ل","Lam"],["م","Mim"],
+["ن","Nun"],["و","Wau"],["ه","Ha"],["ء","Hamzah"],
+["ي","Ya"]
+];
+
+/* =========================
+   50 LEVEL × 5 SOAL
+   TOTAL 250 SOAL
+========================= */
+
+const quizData = [
+
+/* 1 */
+[
+["Apa agama yang dibawa Nabi Muhammad ﷺ?",["Islam","Kristen","Hindu","Buddha"],0],
+["Berapa jumlah rukun Islam?",["3","4","5","6"],2],
+["Kitab suci umat Islam adalah?",["Al-Qur'an","Taurat","Injil","Weda"],0],
+["Siapa nabi terakhir?",["Nabi Musa","Nabi Isa","Nabi Muhammad","Nabi Nuh"],2],
+["Berapa kali salat wajib dalam sehari?",["3","4","5","6"],2]
+],
+
+/* 2 */
+[
+["Rukun iman berjumlah?",["4","5","6","7"],2],
+["Malaikat yang menyampaikan wahyu adalah?",["Jibril","Mikail","Israfil","Malik"],0],
+["Puasa wajib dilakukan pada bulan?",["Muharram","Ramadan","Syawal","Rajab"],1],
+["Salat Subuh berjumlah rakaat?",["2","3","4","5"],0],
+["Arah umat Islam ketika salat disebut?",["Kiblat","Mihrab","Mimbar","Masjid"],0]
+],
+
+/* 3 */
+[
+["Ka'bah berada di kota?",["Madinah","Makkah","Jeddah","Riyadh"],1],
+["Nabi yang membuat kapal besar adalah?",["Nuh","Yusuf","Ibrahim","Musa"],0],
+["Hari raya setelah Ramadan adalah?",["Idul Fitri","Idul Adha","Isra Mikraj","Asyura"],0],
+["Zakat termasuk rukun Islam ke?",["1","2","3","4"],3],
+["Salat Magrib berjumlah?",["2 rakaat","3 rakaat","4 rakaat","5 rakaat"],1]
+],
+
+/* 4 */
+[
+["Malaikat pencatat amal baik adalah?",["Raqib","Atid","Malik","Munkar"],0],
+["Malaikat pencatat amal buruk adalah?",["Raqib","Atid","Jibril","Mikail"],1],
+["Nabi Ibrahim dikenal sebagai?",["Khalilullah","Kalimatullah","Ruhullah","Najiyullah"],0],
+["Surah pertama dalam Al-Qur'an adalah?",["Al-Fatihah","Al-Baqarah","An-Nas","Al-Ikhlas"],0],
+["Jumlah rakaat salat Zuhur adalah?",["2","3","4","5"],2]
+],
+
+/* 5 */
+[
+["Berapa jumlah salat fardu?",["3","4","5","6"],2],
+["Salat Isya berjumlah?",["2","3","4","5"],2],
+["Tempat umat Islam melaksanakan salat berjamaah disebut?",["Masjid","Pasar","Sekolah","Rumah sakit"],0],
+["Bersuci sebelum salat disebut?",["Wudu","Tidur","Makan","Belajar"],0],
+["Air yang digunakan untuk wudu harus?",["Suci","Kotor","Berwarna","Bau"],0]
+],
+
+/* 6 */
+[
+["Nabi Musa menerima kitab?",["Taurat","Zabur","Injil","Al-Qur'an"],0],
+["Nabi Daud menerima kitab?",["Taurat","Zabur","Injil","Al-Qur'an"],1],
+["Nabi Isa menerima kitab?",["Taurat","Zabur","Injil","Al-Qur'an"],2],
+["Nabi Muhammad menerima kitab?",["Taurat","Zabur","Injil","Al-Qur'an"],3],
+["Al-Qur'an diturunkan kepada Nabi?",["Muhammad","Musa","Isa","Daud"],0]
+],
+
+/* 7 */
+[
+["Membaca Al-Qur'an termasuk?",["Ibadah","Permainan","Olahraga","Perdagangan"],0],
+["Surah yang terdiri dari 3 ayat adalah?",["Al-Kautsar","Al-Fatihah","Al-Baqarah","An-Nisa"],0],
+["Surah terpanjang dalam Al-Qur'an adalah?",["Al-Baqarah","Yasin","Al-Ikhlas","An-Nas"],0],
+["Surah terpendek dalam Al-Qur'an adalah?",["Al-Kautsar","Al-Baqarah","Al-Falaq","An-Nas"],0],
+["Juz terakhir Al-Qur'an dikenal sebagai?",["Juz Amma","Juz Dua","Juz Tiga","Juz Empat"],0]
+],
+
+/* 8 */
+[
+["Malam turunnya Al-Qur'an disebut?",["Lailatul Qadar","Malam Jumat","Asyura","Nisfu Syaban"],0],
+["Bulan pertama kalender Hijriah adalah?",["Muharram","Ramadan","Syawal","Rajab"],0],
+["Bulan kesembilan kalender Hijriah adalah?",["Rajab","Syaban","Ramadan","Syawal"],2],
+["Setelah Ramadan adalah bulan?",["Syawal","Muharram","Safar","Rajab"],0],
+["Idul Adha jatuh pada bulan?",["Dzulhijjah","Ramadan","Syawal","Muharram"],0]
+],
+
+/* 9 */
+[
+["Haji dilakukan di kota?",["Makkah","Madinah","Kairo","Damaskus"],0],
+["Tawaf dilakukan mengelilingi?",["Ka'bah","Makam","Masjid","Bukit"],0],
+["Sa'i dilakukan antara?",["Shafa dan Marwah","Arafah dan Mina","Mina dan Muzdalifah","Makkah dan Madinah"],0],
+["Wukuf dilakukan di?",["Arafah","Mina","Shafa","Marwah"],0],
+["Haji termasuk rukun Islam ke?",["3","4","5","6"],2]
+],
+
+/* 10 */
+[
+["Puasa Ramadan mengajarkan?",["Takwa","Malas","Marah","Boros"],0],
+["Makan sebelum puasa disebut?",["Sahur","Buka","Iftar","Tawaf"],0],
+["Mengakhiri puasa disebut?",["Berbuka","Sahur","Wudu","Tawaf"],0],
+["Orang yang wajib mengeluarkan zakat disebut?",["Muzakki","Musafir","Muazin","Makmum"],0],
+["Orang yang menerima zakat disebut?",["Mustahik","Muzakki","Imam","Khatib"],0]
+],
+
+/* 11 */
+[
+["Tajwid berarti ilmu untuk?",["Membaca Al-Qur'an dengan benar","Berhitung","Menulis Arab saja","Menghafal sejarah"],0],
+["Nun mati memiliki tanda?",["نْ","مْ","ـّ","ـَ"],0],
+["Mim mati memiliki tanda?",["مْ","نْ","ـِ","ـُ"],0],
+["Tanwin terdiri dari?",["Fathatain, kasratain, dammatain","Alif, ba, ta","Fathah saja","Kasrah saja"],0],
+["Mad berkaitan dengan?",["Panjang bacaan","Berhenti makan","Arah kiblat","Jumlah rakaat"],0]
+],
+
+/* 12 */
+[
+["Fathah dibaca?",["A","I","U","E"],0],
+["Kasrah dibaca?",["A","I","U","O"],1],
+["Dammah dibaca?",["A","I","U","E"],2],
+["Sukun menunjukkan huruf?",["Mati","Panjang","Ganda","Berharakat fathah"],0],
+["Tasydid menunjukkan huruf?",["Dibaca rangkap","Mati","Panjang 6","Tidak dibaca"],0]
+],
+
+/* 13 */
+[
+["Nabi yang mendapat mukjizat membelah laut adalah?",["Musa","Nuh","Yusuf","Sulaiman"],0],
+["Nabi yang dapat memahami bahasa hewan adalah?",["Sulaiman","Musa","Isa","Adam"],0],
+["Nabi yang terkenal sangat sabar ketika mendapat ujian adalah?",["Ayyub","Yusuf","Hud","Saleh"],0],
+["Nabi yang dibuang ke sumur oleh saudara-saudaranya adalah?",["Yusuf","Musa","Ibrahim","Ismail"],0],
+["Ayah Nabi Yusuf bernama?",["Ya'qub","Ibrahim","Nuh","Luth"],0]
+],
+
+/* 14 */
+[
+["Nabi pertama adalah?",["Adam","Nuh","Ibrahim","Musa"],0],
+["Manusia pertama adalah?",["Adam","Nuh","Idris","Isa"],0],
+["Istri Nabi Adam bernama?",["Hawa","Maryam","Asiyah","Khadijah"],0],
+["Nabi yang membuat kapal adalah?",["Nuh","Hud","Saleh","Luth"],0],
+["Kaum Nabi Nuh dihukum dengan?",["Banjir besar","Gempa","Api","Belalang"],0]
+],
+
+/* 15 */
+[
+["Ayah Nabi Ibrahim bernama?",["Azar","Yaqub","Imran","Abdullah"],0],
+["Nabi Ibrahim menghancurkan?",["Berhala","Kapal","Istana","Masjid"],0],
+["Putra Nabi Ibrahim yang membantu membangun Ka'bah adalah?",["Ismail","Ishaq","Yusuf","Yaqub"],0],
+["Nabi Ismail dikenal sebagai anak dari?",["Ibrahim","Musa","Nuh","Adam"],0],
+["Mukjizat Nabi Ibrahim ketika dibakar adalah?",["Api menjadi dingin dan keselamatan","Air keluar","Laut terbelah","Batu berbicara"],0]
+],
+
+/* 16 */
+[
+["Nabi Muhammad lahir di?",["Makkah","Madinah","Taif","Kairo"],0],
+["Ayah Nabi Muhammad bernama?",["Abdullah","Abu Talib","Abdul Muthalib","Hamzah"],0],
+["Ibu Nabi Muhammad bernama?",["Aminah","Khadijah","Aisyah","Fatimah"],0],
+["Kakek Nabi Muhammad bernama?",["Abdul Muthalib","Abu Lahab","Abu Talib","Abdullah"],0],
+["Paman Nabi Muhammad yang merawat beliau adalah?",["Abu Talib","Abu Jahal","Abu Sufyan","Abu Hurairah"],0]
+],
+
+/* 17 */
+[
+["Istri pertama Nabi Muhammad adalah?",["Khadijah","Aisyah","Hafshah","Zainab"],0],
+["Sahabat yang menemani Nabi saat hijrah adalah?",["Abu Bakar","Umar","Utsman","Ali"],0],
+["Kota tujuan hijrah Nabi adalah?",["Madinah","Makkah","Taif","Yaman"],0],
+["Hijrah Nabi terjadi dari?",["Makkah ke Madinah","Madinah ke Makkah","Taif ke Makkah","Madinah ke Syam"],0],
+["Masjid pertama yang dibangun Nabi saat hijrah adalah?",["Masjid Quba","Masjid Nabawi","Masjidil Haram","Masjidil Aqsa"],0]
+],
+
+/* 18 */
+[
+["Masjid Nabawi berada di?",["Madinah","Makkah","Taif","Kairo"],0],
+["Masjidil Haram berada di?",["Makkah","Madinah","Damaskus","Baghdad"],0],
+["Masjidil Aqsa berada di?",["Yerusalem","Makkah","Madinah","Kairo"],0],
+["Isra adalah perjalanan dari?",["Masjidil Haram ke Masjidil Aqsa","Madinah ke Makkah","Makkah ke Taif","Arafah ke Mina"],0],
+["Mi'raj berkaitan dengan perjalanan Nabi menuju?",["Langit","Laut","Gunung","Padang pasir"],0]
+],
+
+/* 19 */
+[
+["Salah satu mukjizat Nabi Muhammad adalah?",["Al-Qur'an","Tongkat","Kapal","Api"],0],
+["Nabi Muhammad menerima wahyu pertama di?",["Gua Hira","Gua Tsur","Mina","Arafah"],0],
+["Malaikat yang datang membawa wahyu adalah?",["Jibril","Mikail","Israfil","Malik"],0],
+["Wahyu pertama terdapat dalam surah?",["Al-Alaq","Al-Fatihah","Al-Kautsar","An-Nas"],0],
+["Perintah pertama dalam wahyu adalah?",["Iqra'","Salat","Puasa","Haji"],0]
+],
+
+/* 20 */
+[
+["Akhlak berarti?",["Perilaku/budi pekerti","Makanan","Pakaian","Tempat tinggal"],0],
+["Berkata sesuai kenyataan disebut?",["Jujur","Dusta","Sombong","Hasad"],0],
+["Menjaga titipan disebut?",["Amanah","Riya","Takabur","Ghibah"],0],
+["Membicarakan keburukan orang lain disebut?",["Ghibah","Sabar","Syukur","Amanah"],0],
+["Merasa diri lebih tinggi dari orang lain disebut?",["Sombong","Jujur","Rendah hati","Sabar"],0]
+],
+
+/* 21 */
+[
+["Nabi yang dijuluki Khalilullah adalah?",["Ibrahim","Musa","Isa","Nuh"],0],
+["Nabi yang diberi mukjizat tongkat adalah?",["Musa","Yusuf","Adam","Hud"],0],
+["Nabi yang lahir tanpa ayah adalah?",["Isa","Musa","Yusuf","Ibrahim"],0],
+["Ibu Nabi Isa bernama?",["Maryam","Hawa","Aminah","Hajar"],0],
+["Nabi yang dapat menafsirkan mimpi adalah?",["Yusuf","Nuh","Hud","Saleh"],0]
+],
+
+/* 22 */
+[
+["Nabi yang diutus kepada kaum 'Ad adalah?",["Hud","Saleh","Luth","Syu'aib"],0],
+["Nabi yang diutus kepada kaum Tsamud adalah?",["Saleh","Hud","Luth","Yunus"],0],
+["Nabi yang ditelan ikan adalah?",["Yunus","Yusuf","Musa","Isa"],0],
+["Nabi yang diutus kepada kaum Madyan adalah?",["Syu'aib","Hud","Saleh","Nuh"],0],
+["Nabi Luth berdakwah kepada?",["Kaum Luth","Kaum 'Ad","Kaum Tsamud","Bani Israil"],0]
+],
+
+/* 23 */
+[
+["Nabi yang bisa berbicara ketika masih bayi adalah?",["Isa","Yusuf","Musa","Ibrahim"],0],
+["Nabi yang diberi mukjizat menyembuhkan orang sakit dengan izin Allah adalah?",["Isa","Nuh","Hud","Saleh"],0],
+["Nabi yang membangun bahtera adalah?",["Nuh","Ibrahim","Ismail","Yusuf"],0],
+["Nabi yang terkenal dengan keindahan suara adalah?",["Daud","Musa","Nuh","Adam"],0],
+["Nabi yang memiliki kerajaan luas dan dapat mengendalikan angin adalah?",["Sulaiman","Daud","Yusuf","Musa"],0]
+],
+
+/* 24 */
+[
+["Jumlah nabi dan rasul yang wajib diketahui dalam pelajaran umum adalah?",["25","10","15","40"],0],
+["Rasul Ulul Azmi berjumlah?",["5","3","7","10"],0],
+["Yang termasuk Ulul Azmi adalah?",["Nuh","Yunus","Yusuf","Harun"],0],
+["Yang termasuk Ulul Azmi adalah?",["Ibrahim","Yusuf","Adam","Dzul Kifli"],0],
+["Yang termasuk Ulul Azmi adalah?",["Musa","Yusuf","Harun","Luth"],0]
+],
+
+/* 25 */
+[
+["Nabi Muhammad termasuk rasul?",["Ulul Azmi","Biasa saja","Malaikat","Sahabat"],0],
+["Nabi Nuh termasuk?",["Ulul Azmi","Tabiin","Sahabat","Malaikat"],0],
+["Nabi Ibrahim termasuk?",["Ulul Azmi","Sahabat","Tabiin","Malaikat"],0],
+["Nabi Musa termasuk?",["Ulul Azmi","Sahabat","Malaikat","Tabiin"],0],
+["Nabi Isa termasuk?",["Ulul Azmi","Sahabat","Tabiin","Malaikat"],0]
+],
+
+/* 26 */
+[
+["Sahabat pertama dari kalangan laki-laki dewasa yang masuk Islam adalah?",["Abu Bakar","Umar","Utsman","Ali"],0],
+["Sahabat yang dikenal sangat tegas adalah?",["Umar bin Khattab","Bilal","Abu Hurairah","Zaid"],0],
+["Sahabat yang dikenal sangat pemalu adalah?",["Utsman bin Affan","Umar","Khalid","Bilal"],0],
+["Sepupu sekaligus menantu Nabi Muhammad adalah?",["Ali bin Abi Talib","Abu Bakar","Umar","Utsman"],0],
+["Muazin terkenal pada masa Nabi adalah?",["Bilal bin Rabah","Abu Bakar","Umar","Ali"],0]
+],
+
+/* 27 */
+[
+["Abu Bakar mendapat gelar?",["As-Siddiq","Al-Faruq","Dzun Nurain","Saifullah"],0],
+["Umar bin Khattab mendapat gelar?",["Al-Faruq","As-Siddiq","Dzun Nurain","Saifullah"],0],
+["Utsman bin Affan mendapat gelar?",["Dzun Nurain","Al-Faruq","As-Siddiq","Saifullah"],0],
+["Khalid bin Walid dikenal sebagai?",["Pedang Allah","Singa Allah","Khalilullah","Ruhullah"],0],
+["Bilal bin Rabah berasal dari?",["Habasyah","Madinah","Yaman","Syam"],0]
+],
+
+/* 28 */
+[
+["Istri Nabi yang dikenal sebagai putri Abu Bakar adalah?",["Aisyah","Khadijah","Hafshah","Zainab"],0],
+["Putri Nabi Muhammad yang menjadi istri Ali adalah?",["Fatimah","Ruqayyah","Zainab","Ummu Kultsum"],0],
+["Cucu Nabi dari Fatimah adalah?",["Hasan dan Husain","Umar dan Utsman","Abu Bakar dan Ali","Bilal dan Zaid"],0],
+["Ayah Aisyah adalah?",["Abu Bakar","Umar","Utsman","Ali"],0],
+["Ayah Fatimah adalah?",["Nabi Muhammad","Abu Bakar","Umar","Ali"],0]
+],
+
+/* 29 */
+[
+["Adab kepada orang tua adalah?",["Berbakti","Membentak","Menghina","Melawan"],0],
+["Jika guru berbicara sebaiknya?",["Mendengarkan","Berteriak","Tidur","Pergi"],0],
+["Ketika mendapat nikmat sebaiknya?",["Bersyukur","Sombong","Mengeluh","Marah"],0],
+["Ketika mendapat musibah seorang Muslim dianjurkan?",["Bersabar","Menghina","Putus asa","Marah"],0],
+["Saat berbuat salah kepada orang lain sebaiknya?",["Meminta maaf","Berbohong","Kabur","Menyalahkan"],0]
+],
+
+/* 30 */
+[
+["Mengucapkan salam hukumnya merupakan?",["Amalan yang dianjurkan","Larangan","Dosa","Permainan"],0],
+["Jawaban salam yang benar dimulai dengan?",["Wa'alaikumussalam","Selamat pagi","Halo","Terima kasih"],0],
+["Sebelum makan dianjurkan membaca?",["Bismillah","Takbir Id","Talbiyah","Adzan"],0],
+["Setelah makan dianjurkan?",["Bersyukur","Marah","Tidur langsung","Berlari"],0],
+["Tangan yang dianjurkan digunakan untuk makan adalah?",["Tangan kanan","Tangan kiri","Keduanya wajib","Tidak ada aturan"],0]
+],
+
+/* 31 */
+[
+["Riya berarti?",["Beramal agar dilihat orang","Jujur","Sabar","Bersyukur"],0],
+["Hasad berarti?",["Iri terhadap nikmat orang lain","Rajin","Amanah","Sabar"],0],
+["Tawadhu berarti?",["Rendah hati","Sombong","Marah","Dusta"],0],
+["Tawakal berarti?",["Berserah diri kepada Allah setelah berusaha","Malas","Menyerah tanpa usaha","Sombong"],0],
+["Syukur berarti?",["Berterima kasih atas nikmat Allah","Mengeluh","Marah","Iri"],0]
+],
+
+/* 32 */
+[
+["Sabar berarti?",["Menahan diri dalam kebaikan","Marah","Menyerah","Dusta"],0],
+["Amanah berarti?",["Dapat dipercaya","Pemarah","Sombong","Iri"],0],
+["Adil berarti?",["Menempatkan sesuatu dengan benar","Memihak selalu","Berbohong","Menghina"],0],
+["Ikhlas berarti?",["Beramal karena Allah","Agar dipuji","Agar terkenal","Agar mendapat hadiah"],0],
+["Taubat berarti?",["Kembali dan memohon ampun kepada Allah","Tidur","Makan","Bermain"],0]
+],
+
+/* 33 */
+[
+["Sedekah dapat dilakukan dengan?",["Harta maupun kebaikan","Hanya uang","Hanya makanan","Tidak bisa dilakukan"],0],
+["Menolong orang lain termasuk?",["Kebaikan","Keburukan","Kesombongan","Dosa pasti"],0],
+["Tersenyum kepada sesama dapat menjadi?",["Sedekah","Zakat wajib","Haji","Puasa"],0],
+["Menyebarkan berita bohong termasuk?",["Perbuatan buruk","Sedekah","Ibadah wajib","Sunnah"],0],
+["Menjaga ucapan berarti?",["Berbicara baik atau diam","Banyak menghina","Banyak berbohong","Berteriak"],0]
+],
+
+/* 34 */
+[
+["Zakat fitrah dikeluarkan menjelang?",["Idul Fitri","Idul Adha","Awal Muharram","Isra Mikraj"],0],
+["Zakat bertujuan membantu?",["Orang yang berhak menerima","Orang kaya saja","Pedagang saja","Pejabat saja"],0],
+["Puasa berarti menahan diri dari hal yang membatalkan sejak?",["Fajar sampai Magrib","Siang sampai malam","Magrib sampai Subuh","Tengah malam"],0],
+["Makan dengan sengaja saat puasa Ramadan dapat?",["Membatalkan puasa","Menambah pahala","Tidak berpengaruh","Menjadi wajib"],0],
+["Orang sakit yang tidak mampu berpuasa memiliki?",["Keringanan sesuai syariat","Tidak ada pilihan","Wajib memaksakan diri","Harus berhenti salat"],0]
+],
+
+/* 35 */
+[
+["Salat Jumat dilaksanakan pada hari?",["Jumat","Senin","Selasa","Minggu"],0],
+["Azan merupakan seruan untuk?",["Salat","Makan","Tidur","Belajar"],0],
+["Orang yang memimpin salat berjamaah disebut?",["Imam","Makmum","Muazin","Khatib"],0],
+["Orang yang mengikuti imam disebut?",["Makmum","Khatib","Muazin","Imam"],0],
+["Orang yang mengumandangkan azan disebut?",["Muazin","Imam","Makmum","Khatib"],0]
+],
+
+/* 36 */
+[
+["Salat Tarawih dilakukan pada?",["Bulan Ramadan","Muharram","Syawal","Dzulhijjah"],0],
+["Salat Witir biasanya dilakukan dengan jumlah rakaat?",["Ganjil","Selalu 2","Selalu 4","Selalu 6"],0],
+["Salat Idul Fitri dilakukan pada?",["1 Syawal","1 Ramadan","10 Muharram","10 Dzulhijjah"],0],
+["Salat Idul Adha dilakukan pada?",["10 Dzulhijjah","1 Syawal","1 Muharram","27 Ramadan"],0],
+["Hari Arafah berada pada tanggal?",["9 Dzulhijjah","1 Syawal","10 Muharram","27 Ramadan"],0]
+],
+
+/* 37 */
+[
+["Qiblat umat Islam adalah?",["Ka'bah","Masjid Nabawi","Masjid Quba","Bukit Uhud"],0],
+["Ka'bah dibangun kembali oleh Nabi Ibrahim dan?",["Ismail","Yusuf","Musa","Isa"],0],
+["Hajar Aswad berada di?",["Ka'bah","Masjid Nabawi","Arafah","Mina"],0],
+["Tawaf dilakukan sebanyak?",["7 putaran","5 putaran","3 putaran","10 putaran"],0],
+["Sa'i dilakukan sebanyak?",["7 kali perjalanan","2 kali","3 kali","10 kali"],0]
+],
+
+/* 38 */
+[
+["Masjid Quba berada di sekitar?",["Madinah","Makkah","Taif","Yaman"],0],
+["Perang Badar terjadi pada?",["Masa Nabi Muhammad","Masa Nabi Musa","Masa Nabi Nuh","Masa Nabi Ibrahim"],0],
+["Perang Uhud terjadi di dekat?",["Madinah","Makkah","Yaman","Mesir"],0],
+["Hijrah menjadi dasar penanggalan?",["Hijriah","Masehi","Jawa","Romawi"],0],
+["Tahun hijrah Nabi menuju Madinah adalah?",["Awal kalender Hijriah","Akhir kalender Hijriah","Tahun 1 Masehi","Tidak berkaitan"],0]
+],
+
+/* 39 */
+[
+["Salah satu nama Al-Qur'an adalah?",["Al-Furqan","Taurat","Injil","Zabur"],0],
+["Al-Furqan berarti?",["Pembeda antara benar dan salah","Buku sejarah","Doa","Masjid"],0],
+["Surah Al-Ikhlas membahas tentang?",["Keesaan Allah","Haji","Puasa","Perang"],0],
+["Surah Al-Falaq memohon perlindungan kepada?",["Allah","Manusia","Malaikat","Jin"],0],
+["Surah An-Nas memohon perlindungan kepada?",["Allah","Manusia","Malaikat","Nabi"],0]
+],
+
+/* 40 */
+[
+["Allah itu Maha Esa berarti?",["Allah itu satu","Allah banyak","Allah tidur","Allah membutuhkan manusia"],0],
+["Asmaul Husna adalah?",["Nama-nama baik Allah","Nama nabi","Nama malaikat","Nama sahabat"],0],
+["Ar-Rahman berarti?",["Maha Pengasih","Maha Mengetahui","Maha Mendengar","Maha Melihat"],0],
+["Ar-Rahim berarti?",["Maha Penyayang","Maha Menghukum","Maha Kaya","Maha Mencipta"],0],
+["Al-'Alim berarti?",["Maha Mengetahui","Maha Pengasih","Maha Mendengar","Maha Melihat"],0]
+],
+
+/* 41 */
+[
+["Malaikat yang bertugas meniup sangkakala adalah?",["Israfil","Jibril","Mikail","Malik"],0],
+["Malaikat penjaga neraka dikenal sebagai?",["Malik","Jibril","Mikail","Israfil"],0],
+["Malaikat yang bertugas mengatur rezeki/hujan dengan izin Allah adalah?",["Mikail","Jibril","Israfil","Malik"],0],
+["Malaikat yang bertugas menyampaikan wahyu adalah?",["Jibril","Mikail","Malik","Israfil"],0],
+["Malaikat yang mencatat amal manusia adalah?",["Raqib dan Atid","Jibril dan Mikail","Malik dan Ridwan","Israfil dan Malik"],0]
+],
+
+/* 42 */
+[
+["Hari kebangkitan disebut?",["Yaumul Ba'ats","Yaumul Jumat","Yaumul Hijrah","Yaumul Fitri"],0],
+["Hari perhitungan amal disebut?",["Yaumul Hisab","Yaumul Adha","Yaumul Qadar","Yaumul Hijrah"],0],
+["Tempat orang beriman mendapat balasan kenikmatan adalah?",["Surga","Neraka","Dunia","Makam"],0],
+["Tempat orang yang mendapat azab karena kekufuran adalah?",["Neraka","Surga","Masjid","Madinah"],0],
+["Beriman kepada hari akhir termasuk?",["Rukun iman","Rukun Islam","Syarat haji","Syarat wudu"],0]
+],
+
+/* 43 */
+[
+["Beriman kepada takdir berarti meyakini?",["Ketetapan Allah","Manusia tidak perlu berusaha","Semua hal boleh dilakukan","Tidak perlu berdoa"],0],
+["Setelah berusaha seorang Muslim dianjurkan?",["Tawakal","Sombong","Putus asa","Malas"],0],
+["Doa berarti?",["Memohon kepada Allah","Berbicara dengan manusia","Bernyanyi","Tidur"],0],
+["Istighfar berarti?",["Memohon ampun kepada Allah","Meminta uang","Membaca sejarah","Berdoa untuk makan saja"],0],
+["Ucapan memohon ampun yang terkenal adalah?",["Astaghfirullah","Alhamdulillah","Allahu Akbar","Subhanallah"],0]
+],
+
+/* 44 */
+[
+["Alhamdulillah berarti?",["Segala puji bagi Allah","Allah Maha Besar","Maha Suci Allah","Aku memohon ampun"],0],
+["Subhanallah berarti?",["Maha Suci Allah","Segala puji bagi Allah","Allah Maha Besar","Aku memohon ampun"],0],
+["Allahu Akbar berarti?",["Allah Maha Besar","Maha Suci Allah","Segala puji bagi Allah","Aku bertobat"],0],
+["Masya Allah biasanya diucapkan ketika?",["Melihat sesuatu yang mengagumkan","Sedang tidur","Selesai makan saja","Sedang marah"],0],
+["Insya Allah berarti?",["Jika Allah menghendaki","Allah Maha Besar","Segala puji bagi Allah","Aku memohon ampun"],0]
+],
+
+/* 45 */
+[
+["Sifat wajib rasul yang berarti jujur adalah?",["Siddiq","Amanah","Tabligh","Fathanah"],0],
+["Sifat rasul yang berarti dapat dipercaya adalah?",["Amanah","Siddiq","Tabligh","Fathanah"],0],
+["Sifat rasul yang berarti menyampaikan adalah?",["Tabligh","Amanah","Siddiq","Fathanah"],0],
+["Sifat rasul yang berarti cerdas adalah?",["Fathanah","Amanah","Siddiq","Tabligh"],0],
+["Lawan dari Siddiq adalah?",["Kizib","Amanah","Fathanah","Tabligh"],0]
+],
+
+/* 46 */
+[
+["Lawan dari amanah adalah?",["Khianat","Jujur","Sabar","Ikhlas"],0],
+["Lawan dari tabligh adalah?",["Kitman","Amanah","Siddiq","Fathanah"],0],
+["Lawan dari fathanah adalah?",["Baladah","Amanah","Siddiq","Tabligh"],0],
+["Sifat mustahil rasul yang berarti berdusta adalah?",["Kizib","Khianat","Kitman","Baladah"],0],
+["Rasul wajib menyampaikan wahyu kepada?",["Umatnya","Dirinya sendiri","Hanya keluarganya","Tidak kepada siapa pun"],0]
+],
+
+/* 47 */
+[
+["Hukum menjaga kebersihan dalam Islam termasuk?",["Perbuatan baik","Perbuatan buruk","Dosa","Larangan"],0],
+["Membuang sampah sembarangan dapat?",["Mengganggu orang lain dan lingkungan","Menjadi ibadah","Menambah pahala","Menjadi sunnah"],0],
+["Menjaga kebersihan masjid merupakan?",["Perbuatan baik","Perbuatan buruk","Hal sia-sia","Larangan"],0],
+["Menghormati tetangga termasuk?",["Akhlak baik","Akhlak buruk","Kesombongan","Riya"],0],
+["Membantu teman yang kesulitan termasuk?",["Tolong-menolong dalam kebaikan","Ghibah","Hasad","Riya"],0]
+],
+
+/* 48 */
+[
+["Jika berbeda pendapat sebaiknya?",["Saling menghormati","Saling menghina","Marah","Memutus persahabatan"],0],
+["Islam mengajarkan umatnya untuk?",["Berbuat baik","Berbuat zalim","Berbohong","Menghina"],0],
+["Menepati janji termasuk?",["Akhlak terpuji","Akhlak tercela","Riya","Hasad"],0],
+["Meminta izin sebelum memakai barang orang lain adalah?",["Adab yang baik","Perbuatan buruk","Kesombongan","Ghibah"],0],
+["Mengembalikan barang pinjaman termasuk?",["Amanah","Hasad","Riya","Takabur"],0]
+],
+
+/* 49 */
+[
+["Apa tujuan utama manusia diciptakan menurut Al-Qur'an?",["Beribadah kepada Allah","Menjadi kaya","Menjadi terkenal","Bermain"],0],
+["Allah adalah pencipta?",["Seluruh alam","Manusia saja","Malaikat saja","Bumi saja"],0],
+["Sumber hukum utama umat Islam adalah?",["Al-Qur'an","Cerita rakyat","Pendapat teman","Novel"],0],
+["Nabi Muhammad adalah?",["Utusan Allah","Malaikat","Sahabat","Tabiin"],0],
+["Orang yang beriman dan beramal saleh mendapat?",["Pahala","Dosa","Hukuman pasti","Tidak ada balasan"],0]
+],
+
+/* 50 */
+[
+["Rukun Islam yang pertama adalah?",["Syahadat","Salat","Zakat","Puasa"],0],
+["Rukun iman yang pertama adalah iman kepada?",["Allah","Malaikat","Kitab","Rasul"],0],
+["Kitab terakhir yang diturunkan Allah adalah?",["Al-Qur'an","Taurat","Zabur","Injil"],0],
+["Nabi terakhir adalah?",["Muhammad ﷺ","Musa","Isa","Ibrahim"],0],
+["Gelar untuk orang yang menyelesaikan seluruh 50 level ini adalah?",["Master Islam","Muazin","Khatib","Muzakki"],0]
+]
+
+];
+
+
+/* =========================
+   DATA IQRO
+========================= */
+
+const iqroData = {
+
+1:[
+["ا","Alif"],
+["ب","Ba"],
+["ت","Ta"],
+["ث","Tsa"],
+["ج","Jim"],
+["ح","Ha"],
+["خ","Kha"],
+["د","Dal"]
+],
+
+2:[
+["بَ","Ba"],
+["بِ","Bi"],
+["بُ","Bu"],
+["تَ","Ta"],
+["تِ","Ti"],
+["تُ","Tu"],
+["جَ","Ja"],
+["جِ","Ji"]
+],
+
+3:[
+["بَا","Baa"],
+["بِي","Bii"],
+["بُو","Buu"],
+["تَا","Taa"],
+["تِي","Tii"],
+["تُو","Tuu"],
+["جَا","Jaa"],
+["جِي","Jii"]
+],
+
+4:[
+["اَبَ","A-ba"],
+["اَتَ","A-ta"],
+["اَجَ","A-ja"],
+["بَتَ","Ba-ta"],
+["بَجَ","Ba-ja"],
+["تَجَ","Ta-ja"],
+["جَدَ","Ja-da"],
+["دَرَ","Da-ra"]
+],
+
+5:[
+["اَلْحَمْدُ","Al-hamdu"],
+["رَبِّ","Rabbi"],
+["الْعَالَمِينَ","Al-'aalamiin"],
+["مَالِكِ","Maaliki"],
+["يَوْمِ","Yaumi"],
+["الدِّينِ","Ad-diin"],
+["نَعْبُدُ","Na'budu"],
+["نَسْتَعِينُ","Nasta'iin"]
+],
+
+6:[
+["الرَّحْمٰنِ","Ar-Rahmaan"],
+["الرَّحِيمِ","Ar-Rahiim"],
+["اهْدِنَا","Ihdinaa"],
+["الصِّرَاطَ","Ash-shiraath"],
+["الْمُسْتَقِيمَ","Al-mustaqiim"],
+["أَنْعَمْتَ","An'amta"],
+["الْمَغْضُوبِ","Al-maghdhuub"],
+["الضَّالِّينَ","Ad-dhaalliin"]
+]
+
+};
+
+
+/* =========================
+   STORAGE
+========================= */
+
+let unlockedLevel =
+Number(localStorage.getItem("rafikoUnlocked")) || 1;
+
+let completedLevels =
+JSON.parse(localStorage.getItem("rafikoCompleted") || "[]");
+
+let totalScore =
+Number(localStorage.getItem("rafikoScore")) || 0;
+
+let totalCorrect =
+Number(localStorage.getItem("rafikoCorrect")) || 0;
+
+let currentLevel=1;
+let currentQuestion=0;
+let currentCorrect=0;
+let quizLocked=false;
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(id){
+
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  window.scrollTo(0,0);
+
+  if(id==="quiz") loadLevels();
+
+  updateProgress();
+}
+
+
+/* =========================
+   HIJAIYAH
+========================= */
+
+function loadLetters(){
+
+  const box=document.getElementById("letters");
+  box.innerHTML="";
+
+  hijaiyah.forEach(function(item){
+
+    const btn=document.createElement("button");
+
+    btn.className="letter";
+
+    btn.innerHTML=
+      item[0]+"<br><small>"+item[1]+"</small>";
+
+    btn.onclick=function(){
+      speak(item[0]);
+    };
+
+    box.appendChild(btn);
+
+  });
+
+}
+
+
+/* =========================
+   IQRO
+========================= */
+
+function loadIqro(){
+
+  const box=document.getElementById("iqroList");
+
+  box.innerHTML="";
+
+  for(let i=1;i<=6;i++){
+
+    const btn=document.createElement("button");
+
+    btn.className="iqro";
+
+    btn.innerHTML=
+      "<b>Iqro "+i+"</b><small>Mulai belajar</small>";
+
+    btn.onclick=function(){
+      openIqro(i);
+    };
+
+    box.appendChild(btn);
+
+  }
+
+}
+
+function openIqro(number){
+
+  document.getElementById("iqroTitle").innerText=
+    "📖 Iqro "+number;
+
+  const box=document.getElementById("lessonList");
+
+  box.innerHTML="";
+
+  iqroData[number].forEach(function(item,index){
+
+    const lesson=document.createElement("div");
+
+    lesson.className="lesson";
+
+    lesson.innerHTML=
+      "<small>Pelajaran "+(index+1)+"</small>"+
+      "<div class='read'>"+item[0]+"</div>"+
+      "<button class='mainBtn'>🔊 Dengarkan</button>";
+
+    lesson.querySelector("button").onclick=function(){
+      speak(item[0]);
+    };
+
+    box.appendChild(lesson);
+
+  });
+
+  showPage("iqroDetail");
+}
+
+
+/* =========================
+   QUIZ LEVEL
+========================= */
+
+function loadLevels(){
+
+  const box=document.getElementById("levelList");
+
+  box.innerHTML="";
+
+  for(let i=1;i<=50;i++){
+
+    const btn=document.createElement("button");
+
+    btn.className="levelBtn";
+
+    const done=completedLevels.includes(i);
+
+    if(i>unlockedLevel){
+
+      btn.classList.add("locked");
+
+      btn.innerHTML="🔒 Level "+i;
+
+      btn.onclick=function(){
+        alert("🔒 Level ini masih terkunci.\nSelesaikan level sebelumnya dengan minimal 4/5 benar.");
+      };
+
+    }else{
+
+      if(done) btn.classList.add("done");
+
+      btn.innerHTML=
+        done
+        ? "⭐ Level "+i
+        : "▶️ Level "+i;
+
+      btn.onclick=function(){
+        startLevel(i);
+      };
+
+    }
+
+    box.appendChild(btn);
+
+  }
+
+  document.getElementById("totalScore").innerText=totalScore;
+
+}
+
+
+function startLevel(level){
+
+  if(level>unlockedLevel){
+
+    alert("Level masih terkunci.");
+
+    return;
+  }
+
+  currentLevel=level;
+  currentQuestion=0;
+  currentCorrect=0;
+  quizLocked=false;
+
+  document.getElementById("levelTitle").innerText=
+    "🧠 Level "+level;
+
+  showPage("quizPlay");
+
+  loadQuestion();
+
+}
+
+
+/* =========================
+   LOAD QUESTION
+========================= */
+
+function loadQuestion(){
+
+  quizLocked=false;
+
+  const q=quizData[currentLevel-1][currentQuestion];
+
+  document.getElementById("qNumber").innerText=
+    currentQuestion+1;
+
+  document.getElementById("question").innerText=
+    q[0];
+
+  document.getElementById("questionProgress").style.width=
+    ((currentQuestion)/5*100)+"%";
+
+  document.getElementById("quizResult").innerHTML="";
+
+  const box=document.getElementById("options");
+
+  box.innerHTML="";
+
+  q[1].forEach(function(answer){
+
+    const btn=document.createElement("button");
+
+    btn.className="option";
+
+    btn.innerText=answer;
+
+    /*
+      PENTING:
+      Tombol mengirim TEKS JAWABAN,
+      bukan nomor index.
+      Jadi sistem tidak salah membaca jawaban.
+    */
+
+    btn.onclick=function(){
+      answerQuestion(answer);
+    };
+
+    box.appendChild(btn);
+
+  });
+
+}
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function answerQuestion(answer){
+
+  if(quizLocked) return;
+
+  quizLocked=true;
+
+  const q=quizData[currentLevel-1][currentQuestion];
+
+  const correctAnswer=q[1][q[2]];
+
+  if(
+    String(answer).trim().toLowerCase()
+    ===
+    String(correctAnswer).trim().toLowerCase()
+  ){
+
+    currentCorrect++;
+    totalCorrect++;
+    totalScore+=10;
+
+    document.getElementById("quizResult").innerHTML=
+      "<div class='result'>"+
+      "✅ <b>BENAR!</b><br>"+
+      "+10 poin"+
+      "</div>";
+
+  }else{
+
+    document.getElementById("quizResult").innerHTML=
+      "<div class='result'>"+
+      "❌ <b>Belum tepat.</b><br>"+
+      "Jawaban benar: <b>"+
+      correctAnswer+
+      "</b>"+
+      "</div>";
+
+  }
+
+  saveData();
+
+  setTimeout(function(){
+
+    currentQuestion++;
+
+    if(currentQuestion>=5){
+
+      finishLevel();
+
+    }else{
+
+      loadQuestion();
+
+    }
+
+  },1000);
+
+}
+
+
+/* =========================
+   FINISH LEVEL
+========================= */
+
+function finishLevel(){
+
+  if(currentCorrect>=4){
+
+    if(!completedLevels.includes(currentLevel)){
+
+      completedLevels.push(currentLevel);
+
+    }
+
+    if(
+      currentLevel===unlockedLevel &&
+      unlockedLevel<50
+    ){
+
+      unlockedLevel++;
+
+    }
+
+    saveData();
+
+    setTimeout(function(){
+
+      alert(
+        "🎉 LEVEL "+currentLevel+
+        " SELESAI!\n\n"+
+        "Benar: "+currentCorrect+"/5\n"+
+        "Skor: +"+(currentCorrect*10)+" poin\n\n"+
+        (
+          currentLevel===50
+          ? "🏆 SELAMAT! KAMU MENYELESAIKAN 50 LEVEL!"
+          : "🔓 Level berikutnya terbuka!"
+        )
+      );
+
+      showPage("quiz");
+
+    },100);
+
+  }else{
+
+    setTimeout(function(){
+
+      alert(
+        "Belum berhasil membuka level berikutnya 😭\n\n"+
+        "Benar: "+currentCorrect+"/5\n"+
+        "Minimal 4/5 benar.\n\n"+
+        "Coba lagi ya!"
+      );
+
+      showPage("quiz");
+
+    },100);
+
+  }
+
+}
+
+
+/* =========================
+   STORAGE SAVE
+========================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    "rafikoUnlocked",
+    unlockedLevel
+  );
+
+  localStorage.setItem(
+    "rafikoCompleted",
+    JSON.stringify(completedLevels)
+  );
+
+  localStorage.setItem(
+    "rafikoScore",
+    totalScore
+  );
+
+  localStorage.setItem(
+    "rafikoCorrect",
+    totalCorrect
+  );
+
+  updateProgress();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+  const level=document.getElementById("progressLevel");
+
+  const score=document.getElementById("progressScore");
+
+  const correct=document.getElementById("progressCorrect");
+
+  const bar=document.getElementById("mainProgress");
+
+  if(level)
+    level.innerText=unlockedLevel;
+
+  if(score)
+    score.innerText=totalScore;
+
+  if(correct)
+    correct.innerText=totalCorrect;
+
+  if(bar)
+    bar.style.width=
+      ((unlockedLevel-1)/49*100)+"%";
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetProgress(){
+
+  const yes=confirm(
+    "Yakin mau menghapus semua progress?"
+  );
+
+  if(!yes) return;
+
+  localStorage.removeItem("rafikoUnlocked");
+  localStorage.removeItem("rafikoCompleted");
+  localStorage.removeItem("rafikoScore");
+  localStorage.removeItem("rafikoCorrect");
+
+  unlockedLevel=1;
+  completedLevels=[];
+  totalScore=0;
+  totalCorrect=0;
+
+  loadLevels();
+  updateProgress();
+
+  alert("Progress sudah direset.");
+
+}
+
+
+/* =========================
+   TEXT TO SPEECH
+========================= */
+
+function speak(text){
+
+  if(!("speechSynthesis" in window)){
+
+    alert("Browser HP ini tidak mendukung suara.");
+
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance=
+    new SpeechSynthesisUtterance(text);
+
+  utterance.lang="ar-SA";
+
+  utterance.rate=.75;
+
+  speechSynthesis.speak(utterance);
+
+}
+
+
+/* =========================
+   VOICE PRACTICE
+========================= */
+
+function speakText(){
+
+  const text=
+    document.getElementById("voiceText").value.trim();
+
+  if(!text){
+
+    alert("Tulis bacaan dulu.");
+
+    return;
+  }
+
+  speak(text);
+
+}
+
+
+function startListening(){
+
+  const Recognition=
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if(!Recognition){
+
+    document.getElementById("voiceResult").innerHTML=
+      "❌ Browser ini belum mendukung pengenalan suara. Coba buka melalui Chrome.";
+
+    return;
+  }
+
+  const recognition=new Recognition();
+
+  recognition.lang="ar-SA";
+
+  recognition.interimResults=false;
+
+  recognition.maxAlternatives=1;
+
+  document.getElementById("voiceResult").innerHTML=
+    "🎤 Sedang mendengarkan...";
+
+  recognition.start();
+
+  recognition.onresult=function(event){
+
+    const result=
+      event.results[0][0].transcript;
+
+    document.getElementById("voiceResult").innerHTML=
+      "🗣️ Terdengar:<br><b>"+
+      result+
+      "</b>";
+
+  };
+
+  recognition.onerror=function(){
+
+    document.getElementById("voiceResult").innerHTML=
+      "❌ Suara tidak terbaca. Coba lagi dengan suara yang jelas.";
+
+  };
+
+}
+
+
+/* =========================
+   START APP
+========================= */
+
+loadLetters();
+
+loadIqro();
+
+loadLevels();
+
+updateProgress();
+
+</script>
+
+</body>
+</html>
